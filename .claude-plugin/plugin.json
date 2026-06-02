@@ -1,0 +1,6 @@
+{
+  "name": "higgsfield-shortform",
+  "version": "0.1.0",
+  "description": "한 줄 로그라인에서 숏폼/릴스(15~60초 세로형) 영상을 기획부터 완성까지 안내하는 7단계 오케스트레이터. 허준호 감독 파이프라인 + harness engineering. 스마트 게이트로 창작 판단 단계는 인간 안목을 강제한다. Higgsfield MCP 연동.",
+  "keywords": ["higgsfield", "shortform", "video", "reels", "pipeline", "orchestrator", "ai-video"]
+}

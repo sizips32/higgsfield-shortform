@@ -1,0 +1,142 @@
+{
+  "project_title": "섬마을 아이의 첫 등교 배",
+  "aspect_ratio": "16:9",
+  "shots": [
+    {
+      "id": "s01",
+      "duration": 6,
+      "story_function": "Opening image: the child faces the first threshold between island home and school life.",
+      "subject": "A 7-year-old Korean island child in a slightly oversized yellow raincoat, navy school backpack, worn sneakers, holding a folded ferry schedule.",
+      "setting": "A small island ferry pier at early morning, wet wooden dock, coiled rope, low concrete seawall, calm gray-blue sea, faint ferry shape far away.",
+      "camera": "Child-height 35mm natural lens, slow restrained dolly-in from behind and slightly to the side, ending in a quiet profile close-medium frame.",
+      "action": "The child stands still near the dock edge, lightly squeezes the backpack strap, looks toward the distant ferry, then exhales with a tiny brave smile.",
+      "lighting": "Soft misty morning backlight from the camera-left horizon, muted blue-gray sea, yellow raincoat as the warm focal color.",
+      "continuity_anchors": [
+        "yellow raincoat",
+        "navy school backpack",
+        "folded ferry schedule",
+        "wet wooden island pier",
+        "soft morning backlight from camera-left",
+        "calm gray-blue sea"
+      ],
+      "higgsfield_notes": {
+        "preferred_model": "seedance_2_0",
+        "media_roles": [],
+        "risk": "Without a reference image, child identity may drift in later shots; use this only as the first text-to-video smoke test."
+      }
+    },
+    {
+      "id": "s02",
+      "duration": 6,
+      "story_function": "Show nervous anticipation through hands rather than exposition.",
+      "subject": "Close-up of the child's small hand gripping the navy backpack strap and folded ferry schedule.",
+      "setting": "Same wet dock, rope and sea blurred in the background.",
+      "camera": "Locked close-up with minimal handheld breathing.",
+      "action": "The hand tightens, relaxes, then smooths the folded paper schedule.",
+      "lighting": "Soft morning side-backlight catching raincoat texture.",
+      "continuity_anchors": [
+        "yellow raincoat sleeve",
+        "navy backpack strap",
+        "folded ferry schedule",
+        "wet wooden dock"
+      ],
+      "higgsfield_notes": {
+        "preferred_model": "seedance_2_0",
+        "media_roles": [
+          "start_image"
+        ],
+        "risk": "Needs reference frame from s01 for sleeve/backpack continuity."
+      }
+    },
+    {
+      "id": "s03",
+      "duration": 7,
+      "story_function": "Introduce quiet community support.",
+      "subject": "The child in yellow raincoat, with an older guardian's hand entering frame to adjust the hood.",
+      "setting": "Island pier with ferry sign and seawall.",
+      "camera": "Medium shot from child height, gentle lateral drift.",
+      "action": "The guardian adjusts the hood; the child looks down, then back to the sea.",
+      "lighting": "Warm edge light on raincoat, muted sea background.",
+      "continuity_anchors": [
+        "yellow raincoat",
+        "navy backpack",
+        "same pier",
+        "camera-left morning light"
+      ],
+      "higgsfield_notes": {
+        "preferred_model": "seedance_2_0",
+        "media_roles": [
+          "start_image"
+        ],
+        "risk": "Adult should remain partial and not become the main subject."
+      }
+    },
+    {
+      "id": "s04",
+      "duration": 6,
+      "story_function": "The ferry becomes real, turning waiting into departure.",
+      "subject": "The distant school ferry approaching the small island pier.",
+      "setting": "Gray-blue morning sea, low horizon, pier edge in foreground.",
+      "camera": "Long-lens restrained shot, almost still.",
+      "action": "The ferry grows slightly larger through sea haze; gull sounds implied but not shown.",
+      "lighting": "Soft hazy backlight, no dramatic sunburst.",
+      "continuity_anchors": [
+        "calm gray-blue sea",
+        "island pier edge",
+        "soft morning haze"
+      ],
+      "higgsfield_notes": {
+        "preferred_model": "kling3_0",
+        "media_roles": [],
+        "risk": "Avoid turning ferry into a large cruise ship."
+      }
+    },
+    {
+      "id": "s05",
+      "duration": 8,
+      "story_function": "The child chooses courage.",
+      "subject": "The child in yellow raincoat walking one small step toward the boarding point.",
+      "setting": "Pier boarding area, wet wood and rope, ferry now closer but still secondary.",
+      "camera": "Low rear tracking shot, slow and steady.",
+      "action": "The child takes a single hesitant step, then a second more confident step.",
+      "lighting": "Morning light rim on raincoat and backpack.",
+      "continuity_anchors": [
+        "yellow raincoat",
+        "navy backpack",
+        "wet wooden pier",
+        "same ferry direction"
+      ],
+      "higgsfield_notes": {
+        "preferred_model": "seedance_2_0",
+        "media_roles": [
+          "start_image",
+          "end_image"
+        ],
+        "risk": "Walking motion may become too large; keep action minimal."
+      }
+    },
+    {
+      "id": "s06",
+      "duration": 7,
+      "story_function": "End with the threshold crossed, not with a lecture.",
+      "subject": "The child's small hand on the ferry rail, yellow sleeve visible.",
+      "setting": "Ferry entrance with island pier receding behind.",
+      "camera": "Close-up from inside ferry looking outward, gentle handheld sway.",
+      "action": "The child's hand settles on the rail; the island pier slowly softens in the background.",
+      "lighting": "Soft morning light, warmer than opening but still natural.",
+      "continuity_anchors": [
+        "yellow raincoat sleeve",
+        "navy backpack edge",
+        "island pier in background",
+        "morning haze"
+      ],
+      "higgsfield_notes": {
+        "preferred_model": "seedance_2_0",
+        "media_roles": [
+          "start_image"
+        ],
+        "risk": "Needs careful prompt to avoid melodramatic farewell."
+      }
+    }
+  ]
+}

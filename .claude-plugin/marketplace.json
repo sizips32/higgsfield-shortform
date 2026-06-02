@@ -1,0 +1,12 @@
+{
+  "name": "higgsfield-shortform",
+  "owner": {
+    "name": "sizips32"
+  },
+  "plugins": [
+    {
+      "name": "higgsfield-shortform",
+      "source": "./"
+    }
+  ]
+}

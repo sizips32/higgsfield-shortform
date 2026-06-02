@@ -8,7 +8,7 @@
 - **인간 안목** — 최종 컷 선별은 AI가 대신 하지 않는다.
 
 ## 요건
-- `higgsfield` CLI 설치·인증 (`higgsfield auth login`). 크레딧 필요(렌더 단계).
+- Higgsfield MCP 도구 사용 가능 상태. 크레딧 필요(렌더 단계).
 - Python 3.12+ (state 헬퍼, 외부 의존성 없음).
 
 ## 사용법
@@ -28,7 +28,7 @@
 | 6 | 큐레이션 | **인간 안목** | virality 소액(옵션) |
 | 7 | 후반 체크리스트 | 없음 | 무료 |
 
-옵션: `short-consistency`(soul-id) — 반복 인물 얼굴 일관성.
+옵션: `short-consistency` — MCP 참조 미디어로 반복 인물 얼굴 일관성 보강.
 
 ## 상태·재개
 프로젝트별 워크스페이스 `projects/<slug>/`에 상태(`state.json`)와 산출물(`briefs/`, `assets/`)이 저장된다. 게이트 승인·단계 전이는 `lib/state.py`가 강제한다(마크다운이 우회 불가). 세션이 끊겨도 `--resume`으로 이어간다.
