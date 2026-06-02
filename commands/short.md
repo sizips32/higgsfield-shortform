@@ -37,21 +37,22 @@ allowed-tools: Bash, Read, Write, Skill
 
 ### currentStep == 2 (시나리오)
 1. `Skill` 도구로 `short-script` 호출.
-2. 스킬이 `projects/<slug>/briefs/shotlist.md`를 쓰고 승인을 받는다.
-3. `python3 lib/state.py set-output <slug> 2 --file briefs/shotlist.md`
-4. 승인 시: `python3 lib/state.py approve <slug> 2`
-5. `python3 lib/state.py advance <slug>`.
+2. 스킬이 `projects/<slug>/briefs/shotlist.md`를 쓰고 승인을 받는다. 반복 등장 인물이 있으면 `shotlist.md` 안에 **캐릭터 일관성 보드**와 **보이스 시트**를 반드시 포함한다.
+3. 각 캐릭터에는 고유 `voiceTag`를 부여하고, 컷별 대사/행동 옆에 해당 태그를 남긴다.
+4. `python3 lib/state.py set-output <slug> 2 --file briefs/shotlist.md`
+5. 승인 시: `python3 lib/state.py approve <slug> 2`
+6. `python3 lib/state.py advance <slug>`.
 
 ### currentStep == 3 (스타일·키프레임)
 1. `Skill` 도구로 `short-style` 호출 (slug 전달).
-2. 스킬이 비용을 고지하고 사용자 승인 후 키프레임을 생성, `projects/<slug>/assets/keyframes.json`을 쓴다.
+2. 스킬이 비용을 고지하고 사용자 승인 후 키프레임을 생성, `projects/<slug>/assets/keyframes.json`을 쓴다. `characterContinuity`에는 캐릭터별 얼굴·의상·소품 고정 정보와 컷 간 비교 메모를 기록한다.
 3. 톤 확정 후: `python3 lib/state.py set-output <slug> 3 --file assets/keyframes.json`
 4. 사용자 승인 시: `python3 lib/state.py approve <slug> 3`
 5. `python3 lib/state.py advance <slug>` → 코드 0이면 4단계로. 코드 3이면 차단.
 
 ### currentStep == 4 (영상 프롬프트 — 자동, 게이트 없음)
 1. `Skill` 도구로 `short-prompt` 호출 (slug 전달).
-2. 스킬이 `projects/<slug>/briefs/prompts.json`을 쓴다.
+2. 스킬이 `projects/<slug>/briefs/prompts.json`을 쓴다. `voiceGuide`와 컷별 `voiceTag`를 유지해 후속 TTS/NLE 작업에서 캐릭터 음성이 섞이지 않게 한다.
 3. `python3 lib/state.py set-output <slug> 4 --file briefs/prompts.json`
 4. `python3 lib/state.py advance <slug>` (4단계는 gate=false라 approve 불필요).
 
@@ -75,7 +76,7 @@ allowed-tools: Bash, Read, Write, Skill
 3. 스킬이 `projects/<slug>/briefs/post-checklist.md`를 쓴다.
 4. `python3 lib/state.py set-output <slug> 7 --file briefs/post-checklist.md`
 5. **파이프라인 완료 안내**:
-   > "🎬 파이프라인 완료. 산출물: `projects/<slug>/` (concept·shotlist·keyframes·prompts·clips·selects·post-checklist). 사운드·컬러·업스케일은 체크리스트대로 외부 NLE에서 마감하세요. 반복 인물 일관성이 필요하면 `short-consistency` 스킬로 MCP 참조 미디어를 준비할 수 있습니다."
+   > "🎬 파이프라인 완료. 산출물: `projects/<slug>/` (concept·shotlist·캐릭터 일관성 보드·보이스 시트·keyframes·prompts·clips·selects·post-checklist). 사운드·컬러·업스케일·캐릭터별 음성은 체크리스트와 voiceTag 기준대로 외부 NLE에서 마감하세요. 반복 인물 일관성이 더 필요하면 `short-consistency` 스킬로 MCP 참조 미디어와 voiceProfile을 준비할 수 있습니다."
 
 ## 완료 후
 모든 단계가 끝나면 산출물 위치를 요약하고 종료한다. 추가 단계 없음.

@@ -16,13 +16,16 @@ allowed-tools: Read, Write, mcp__higgsfield.generate_image, mcp__higgsfield.gene
 - 이미지나 영상 모델이 영어 프롬프트를 더 잘 이해할 수 있더라도, 이 하네스에서는 영어 프롬프트를 작성하지 않는다. 필요한 시각 정보는 한국어로 구체화한다.
 - 영상 모델은 계속 Seedance 2.0을 기본으로 쓰되, `prompt_language`를 지정할 수 있으면 `ko` 또는 Korean에 해당하는 값을 사용한다.
 - 화면 안 텍스트가 필요한 컷은 한국어만 넣고, 모델이 임의 영어/중국어/가짜 문자를 만들지 않도록 "화면 속 글자는 한국어 외 금지"를 프롬프트에 포함한다.
+- 반복 등장 인물은 **캐릭터 일관성 보드**를 만들어 얼굴형, 머리, 의상, 대표색, 소품, 표정 범위, 금지 변형을 컷별 프롬프트에 반복 주입한다.
+- 캐릭터별 **보이스 시트**를 만들고 `voiceTag`와 `voiceProfile`을 `prompts.json`에 남긴다. 영상 모델이 음성을 직접 생성하지 않아도 후속 TTS/NLE가 같은 태그를 사용한다.
 
 ## 워크플로우
 1. `script.md`와 `shotlist.md`를 읽는다.
-2. `visual-bible.md`를 작성한다: 캐릭터, 장소, 색, 조명, 카메라, 자막 안전 영역.
+2. `visual-bible.md`를 작성한다: 캐릭터 일관성 보드, 보이스 시트, 장소, 색, 조명, 카메라, 자막 안전 영역.
 3. 컷별 GPT Image 2 웹툰 키프레임 프롬프트와 한국어 영상 프롬프트를 만든다.
-4. 비용이 발생하는 생성은 먼저 비용 산정 계획을 작성하고 사용자 승인을 요구한다.
-5. 렌더 완료 후 `higgsfield-plan.md` 또는 `clips.json`에 결과를 기록한다.
+4. `prompts.json`에 `characterContinuity`, `voiceGuide`, 컷별 `voiceTag`를 넣어 캐릭터 외형과 음성이 함께 이어지게 한다.
+5. 비용이 발생하는 생성은 먼저 비용 산정 계획을 작성하고 사용자 승인을 요구한다.
+6. 렌더 완료 후 `higgsfield-plan.md` 또는 `clips.json`에 결과를 기록한다.
 
 ## Higgsfield MCP 전용 도구
 - 이미지 생성: `mcp__higgsfield.generate_image`가 있으면 키프레임에 사용한다. `model: "gpt_image_2"`를 기본값으로 사용한다.
@@ -39,7 +42,8 @@ MCP가 없거나 실패하면 Higgsfield 생성을 실행하지 않는다.
 
 ## 산출물
 `projects/<slug>/briefs/visual-bible.md`:
-- 캐릭터 고정 정보.
+- 캐릭터 일관성 보드: 캐릭터 고정 정보, 참조 media id, 컷 간 비교 포인트.
+- 보이스 시트: `voiceTag`, `voiceProfile`, 말투·속도·어휘·금지 말투.
 - 장소별 무드.
 - 컷별 화면 구도.
 - 자막 위치와 여백.
@@ -48,8 +52,14 @@ MCP가 없거나 실패하면 Higgsfield 생성을 실행하지 않는다.
 - 사용할 모델과 이유.
 - 컷별 GPT Image 2 웹툰 키프레임 프롬프트.
 - 컷별 한국어 영상 프롬프트.
+- characterContinuity와 voiceGuide 적용 방식.
 - 비용 게이트 체크리스트.
 - 실패 시 재시도/단순화 계획.
+
+`projects/<slug>/briefs/prompts.json`:
+- `characterContinuity`: 캐릭터별 고정 외형, 참조 media id, 반복 컷 목록.
+- `voiceGuide`: 캐릭터별 `voiceTag`와 `voiceProfile`.
+- `cuts[]`: 컷 번호, startImage, 등장 캐릭터, `voiceTag`, 한국어 영상 프롬프트.
 
 ## 비용 게이트
 사용자 승인 전에는 실제 생성 작업을 시작하지 않는다. 승인 요청에는 다음을 포함한다.

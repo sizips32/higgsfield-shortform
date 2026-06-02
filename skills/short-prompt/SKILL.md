@@ -11,15 +11,17 @@ allowed-tools: Read, Write
 
 ## 입력
 - slug (오케스트레이터 전달)
-- `projects/<slug>/briefs/shotlist.md` (컷·시간·카메라)
+- `projects/<slug>/briefs/shotlist.md` (컷·시간·카메라·캐릭터 일관성 보드·보이스 시트)
 - `projects/<slug>/assets/keyframes.json` (컷별 jobId = startImage)
 둘 다 Read로 읽는다.
 
 ## 워크플로우
 1. 각 컷마다 **한국어 i2v 프롬프트**를 작성한다. 반드시 포함: 피사체·동작, 카메라워크(앵글·이동), 조명/광원, 동선·속도, 한국 웹툰형 세로 9:16 유지.
-2. 각 컷의 `startImage`에 keyframes.json의 해당 컷 jobId를 매핑한다.
-3. 기본 `videoModel` = `seedance_2_0` (대안: `kling3_0`).
-4. 컷 길이는 shotlist의 시간 배분을 따른다.
+2. `keyframes.json.characterContinuity`와 shotlist의 캐릭터 일관성 보드를 각 컷에 매핑한다.
+3. shotlist의 보이스 시트를 `voiceGuide`로 정리하고, 컷별 대사에는 캐릭터별 `voiceTag`를 남긴다. 영상 모델이 음성을 직접 만들지 않더라도 후속 TTS/NLE가 같은 태그를 쓰도록 한다.
+4. 각 컷의 `startImage`에 keyframes.json의 해당 컷 jobId를 매핑한다.
+5. 기본 `videoModel` = `seedance_2_0` (대안: `kling3_0`).
+6. 컷 길이는 shotlist의 시간 배분을 따른다.
 
 ## 출력
 `projects/<slug>/briefs/prompts.json`을 Write로 작성한다. 스키마:
@@ -29,8 +31,10 @@ allowed-tools: Read, Write
   "videoModel": "seedance_2_0",
   "aspectRatio": "9:16",
   "promptLanguage": "ko",
+  "characterContinuity": {"source": "assets/keyframes.json"},
+  "voiceGuide": [{"character": "A", "voiceTag": "A_calm_mid", "voiceProfile": "차분하고 짧게 말함"}],
   "cuts": [
-    {"cut": 1, "durationSec": 3, "startImage": "<jobId>", "prompt": "<한국어 i2v 프롬프트>"}
+    {"cut": 1, "durationSec": 3, "startImage": "<jobId>", "characters": ["A"], "voiceTag": ["A_calm_mid"], "prompt": "<한국어 i2v 프롬프트>"}
   ]
 }
 ```
@@ -41,6 +45,8 @@ allowed-tools: Read, Write
 - [ ] 모든 프롬프트가 한국어인가?
 - [ ] 컷 수·시간이 shotlist와 일치하는가?
 - [ ] prompts.json이 유효한 JSON인가?
+- [ ] characterContinuity와 voiceGuide가 포함됐는가?
+- [ ] 컷별 voiceTag가 보이스 시트와 일치하는가?
 
 ## 보고
 4단계는 게이트 없는 자동 단계다. prompts.json 작성 후 오케스트레이터가 state를 기록하고 다음(M3 5단계)으로 진행한다.

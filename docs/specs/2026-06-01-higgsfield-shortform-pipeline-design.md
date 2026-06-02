@@ -58,14 +58,15 @@
 | # | 단계 | 게이트 | 주요 도구 | 산출물 |
 |---|---|---|---|---|
 | 1 | **기획** 로그라인→컨셉·훅 | 🚪 승인 | LLM | `briefs/concept.md` |
-| 2 | **시나리오** 15~60s 비트시트·샷리스트 | 🚪 승인 | LLM | `briefs/shotlist.md` |
-| 3 | **스타일·키프레임 이미지** | 자동→🚪 톤 확인 | `mcp__higgsfield.generate_image` (GPT Image 2, 웹툰형) | `assets/keyframes/` |
-| 4 | **샷별 영상 프롬프트 설계** | 자동 | LLM (한국어만, CN 없음) | `briefs/prompts.json` |
+| 2 | **시나리오** 15~60s 비트시트·샷리스트 | 🚪 승인 | LLM | `briefs/shotlist.md` + 캐릭터 일관성 보드 + 보이스 시트 |
+| 3 | **스타일·키프레임 이미지** | 자동→🚪 톤/캐릭터 확인 | `mcp__higgsfield.generate_image` (GPT Image 2, 웹툰형) | `assets/keyframes/` + `characterContinuity` |
+| 4 | **샷별 영상 프롬프트 설계** | 자동 | LLM (한국어만, CN 없음) | `briefs/prompts.json` + `voiceGuide`/`voiceTag` |
 | 5 | **영상 생성** i2v 다중 클립 | 자동 (사전 비용 고지) | `mcp__higgsfield.generate_video` (Seedance 2.0 / Kling 3.0) | `assets/clips/` |
 | 6 | **큐레이션·선별** | 🚪 **인간 안목 강제** | `mcp__higgsfield.virality_predictor` + 사용자 | `briefs/selects.md` |
 | 7 | **후반 체크리스트** 사운드·컬러·업스케일 | 가이드 | 외부툴 안내 | `briefs/post-checklist.md` |
 
-- **일관성**: 인물 등장 시 MCP 참조 미디어와 캐릭터 시트로 얼굴·의상 정보를 반복 주입한다. 공간/사물 상대위치는 프롬프트 템플릿에 명세.
+- **일관성**: 인물 등장 시 MCP 참조 미디어와 캐릭터 시트로 얼굴·의상 정보를 반복 주입한다. 2단계에는 사용자가 비교할 수 있는 **캐릭터 일관성 보드**를 만들고, 3·4단계는 `characterContinuity`로 컷별 고정 정보를 이어받는다. 공간/사물 상대위치는 프롬프트 템플릿에 명세.
+- **음성 구분**: 각 캐릭터는 **보이스 시트**를 갖고 `voiceTag`와 `voiceProfile`로 말투·속도·어휘·감정 폭을 고정한다. 영상 모델이 음성을 직접 만들지 않는 경우에도 `prompts.json.voiceGuide`를 후속 TTS/NLE 기준으로 사용한다.
 - **게이트 정의**: 🚪 = 사용자 승인 없이 다음 단계 진행 불가. 자동 = 사용자 개입 없이 진행하되 결과는 state에 기록.
 
 ---

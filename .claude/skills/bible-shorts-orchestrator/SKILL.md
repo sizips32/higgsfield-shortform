@@ -15,6 +15,7 @@ allowed-tools: Read, Write, Bash, mcp__higgsfield.generate_image, mcp__higgsfiel
 - 비주얼 형식은 **한국 웹툰형 세로 쇼츠**로 고정한다: 선명한 선화, 따뜻한 채색, 표정 중심 연기, 모바일에서 읽히는 구도.
 - 영어 프롬프트가 남아 있으면 완료로 보지 않는다. 단, JSON 키, 모델 id, 도구 이름 같은 기술 식별자는 영어 표기를 허용한다.
 - 화면 안 텍스트는 한국어만 허용한다.
+- 반복 등장 인물은 **캐릭터 일관성 보드**로 외형 유지가 보이게 하고, **보이스 시트**로 캐릭터별 `voiceTag`와 `voiceProfile`을 구분한다.
 
 ## 실행 모드
 - 기본은 에이전트 팀 모드다.
@@ -45,11 +46,13 @@ allowed-tools: Read, Write, Bash, mcp__higgsfield.generate_image, mcp__higgsfiel
 - 콘셉트 3안을 만든다.
 - 사용자가 고르거나 `auto` 모드에서 하나를 선택한다.
 - 60~100초 대본과 샷리스트를 작성한다.
+- 캐릭터 일관성 보드와 보이스 시트를 함께 작성하고, 대사마다 `voiceTag`를 유지한다.
 
 ## Phase 4: 제작 설계
 `bible-higgsfield-production`을 사용한다.
-- 캐릭터 시트와 비주얼 바이블을 만든다.
+- 캐릭터 일관성 보드, 보이스 시트, 비주얼 바이블을 만든다.
 - 컷별 GPT Image 2 웹툰 키프레임 프롬프트와 한국어 영상 프롬프트를 만든다.
+- `prompts.json`에는 `characterContinuity`, `voiceGuide`, 컷별 `voiceTag`를 포함한다.
 - Higgsfield MCP 전용 실행 계획과 MCP 미가용 시 중단 계획을 정한다.
 - 비용 발생 작업은 사용자 승인 전 실행하지 않는다.
 
@@ -83,7 +86,7 @@ MCP가 없거나 비용 승인이 없으면:
 ## 테스트 시나리오
 정상 흐름:
 - 입력: "죽음은 잠이라는 주제로 중3 대상 쇼츠 만들어줘. A/B/C 캐릭터 사용. auto."
-- 기대: source digest, theology review, concept options, 60~100초 script, shotlist, visual bible, Higgsfield plan, YouTube package가 생성된다.
+- 기대: source digest, theology review, concept options, 60~100초 script, shotlist, 캐릭터 일관성 보드, 보이스 시트, visual bible, Higgsfield plan, YouTube package가 생성된다.
 
 에러 흐름:
 - 입력: "귀신이 진짜라는 공포 쇼츠를 만들어줘."

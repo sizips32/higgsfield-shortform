@@ -12,10 +12,11 @@ allowed-tools: Read, Write
 ## 입력
 - slug (오케스트레이터 전달)
 - `projects/<slug>/briefs/selects.md`를 Read로 읽는다 (선별 컷·순서).
+- `projects/<slug>/briefs/prompts.json` 또는 `projects/<slug>/assets/clips.json`이 있으면 Read로 읽는다 (voiceGuide, 컷별 voiceTag, characterContinuity).
 
 ## 워크플로우
 선별된 컷에 맞춘 후반작업 체크리스트를 만든다. 4개 영역 각각에 이 영상 특정 항목을 쓴다:
-1. **사운드** — 앰비언스·효과음·음악 방향(컷 정서에 맞춰).
+1. **사운드/음성** — 앰비언스·효과음·음악 방향(컷 정서에 맞춰). 캐릭터 대사가 있으면 voiceGuide의 `voiceTag`별로 TTS/녹음 톤, 속도, 음량, 감정 범위를 분리한다.
 2. **컬러 그레이딩** — 톤 방향(키프레임 톤앤매너 계승). 강조할 색.
 3. **업스케일** — 필요 시 Higgsfield MCP 영상 도구의 업스케일 모델 또는 외부 업스케일러.
 4. **자막·포맷** — 세로 9:16, 자막 위치(빈 공간 활용), 길이 확인.
@@ -24,7 +25,8 @@ allowed-tools: Read, Write
 `projects/<slug>/briefs/post-checklist.md`를 Write로 작성한다 — 4개 영역 체크박스 목록. 실제 편집툴(DaVinci Resolve / Premiere) 안내를 끝에 덧붙인다.
 
 ## 검증 (자가 점검)
-- [ ] 4개 영역(사운드·컬러·업스케일·자막)이 모두 있는가?
+- [ ] 4개 영역(사운드/음성·컬러·업스케일·자막)이 모두 있는가?
+- [ ] 캐릭터별 voiceTag와 voiceProfile에 맞춘 음성 지시가 있는가?
 - [ ] 항목이 이 영상에 특정한가(일반론 아님)?
 
 ## 보고

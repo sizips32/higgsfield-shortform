@@ -61,3 +61,31 @@ def test_higgsfield_production_paths_are_mcp_only():
     assert "CLI 래핑" not in combined
     assert "generate cost" not in combined
     assert "generate create" not in combined
+
+
+def test_pipeline_requires_visible_character_and_voice_consistency():
+    active_paths = [
+        "README.md",
+        "commands/short.md",
+        "skills/short-script/SKILL.md",
+        "skills/short-style/SKILL.md",
+        "skills/short-prompt/SKILL.md",
+        "skills/short-render/SKILL.md",
+        "skills/short-consistency/SKILL.md",
+        "skills/short-post/SKILL.md",
+        ".claude/skills/bible-shorts-script/SKILL.md",
+        ".claude/skills/bible-higgsfield-production/SKILL.md",
+        ".claude/skills/bible-shorts-orchestrator/SKILL.md",
+        ".claude/skills/bible-shorts-curation/SKILL.md",
+        ".claude/agents/higgsfield-production-director.md",
+        ".claude/agents/middle-school-scriptwriter.md",
+        ".claude/agents/shorts-curation-editor.md",
+        "docs/specs/2026-06-01-higgsfield-shortform-pipeline-design.md",
+    ]
+    combined = "\n".join((ROOT / path).read_text() for path in active_paths)
+
+    assert "캐릭터 일관성 보드" in combined
+    assert "보이스 시트" in combined
+    assert "voiceTag" in combined
+    assert "voiceProfile" in combined
+    assert "characterContinuity" in combined

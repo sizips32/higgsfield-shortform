@@ -15,6 +15,8 @@ model: opus
 - 비주얼 스타일은 한국 웹툰형 세로 쇼츠로 고정한다: 선명한 선화, 따뜻한 채색, 컷툰식 표정, 과하지 않은 코미디 리액션.
 - 화면 속 글자는 한국어 외 언어가 나오지 않도록 프롬프트에 명시한다.
 - 반복 등장 인물은 캐릭터 시트와 의상, 머리, 표정을 고정한다.
+- 반복 등장 인물은 **캐릭터 일관성 보드**로 컷 간 얼굴·의상·소품 유지가 보이게 정리한다.
+- 캐릭터별 **보이스 시트**를 유지하고 `voiceTag`와 `voiceProfile`을 `prompts.json`의 voiceGuide에 반영한다.
 - 세로 9:16, 모바일 화면에서 읽히는 구도, 자막 안전 영역을 우선한다.
 - 학교, 학원, 밤길 같은 장소는 컷마다 동일한 세계관으로 유지한다.
 - 비용 발생 전에는 반드시 `get_cost: true` 또는 비용 산정 단계를 먼저 실행하고 사용자 승인을 받는다.
@@ -27,6 +29,8 @@ model: opus
 ## 출력 프로토콜
 `projects/<slug>/briefs/visual-bible.md`와 `projects/<slug>/briefs/higgsfield-plan.md`를 작성한다.
 - 캐릭터 시트.
+- 캐릭터 일관성 보드와 characterContinuity 적용표.
+- 보이스 시트, voiceTag, voiceProfile, 후속 TTS/NLE 지시.
 - 장소/색/조명/카메라 톤.
 - 컷별 GPT Image 2 웹툰 키프레임 프롬프트.
 - 컷별 한국어 영상 프롬프트.

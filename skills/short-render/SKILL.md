@@ -11,7 +11,7 @@ allowed-tools: Read, Write, mcp__higgsfield.generate_video
 
 ## 입력
 - slug (오케스트레이터 전달)
-- `projects/<slug>/briefs/prompts.json`을 Read로 읽는다 (videoModel, cuts[]={cut, startImage, prompt, durationSec}).
+- `projects/<slug>/briefs/prompts.json`을 Read로 읽는다 (videoModel, characterContinuity, voiceGuide, cuts[]={cut, startImage, prompt, durationSec, voiceTag}).
 
 ## 비용 게이트 (절대 규칙 — 순서 엄수)
 1. 각 컷마다 MCP 비용을 산정한다:
@@ -41,13 +41,14 @@ allowed-tools: Read, Write, mcp__higgsfield.generate_video
 2. 진행 상황을 컷마다 보고한다.
 
 ## 출력
-1. `projects/<slug>/assets/clips.json`을 Write로 작성한다 (스키마: slug, videoModel, clips[]={cut, jobId, url, status}).
+1. `projects/<slug>/assets/clips.json`을 Write로 작성한다 (스키마: slug, videoModel, characterContinuity, voiceGuide, clips[]={cut, jobId, url, status, voiceTag}).
 2. 결과 URL들을 사용자에게 제시한다.
 
 ## 검증 (자가 점검)
 - [ ] 비용을 생성 전에 산정·고지했는가?
 - [ ] 사용자 승인 후에만 생성 호출을 실행했는가?
 - [ ] clips.json에 컷별 jobId/url/status가 채워졌는가?
+- [ ] prompts.json의 characterContinuity, voiceGuide, voiceTag가 clips.json까지 보존됐는가?
 
 ## 보고
 렌더 완료 후 오케스트레이터가 state를 기록한다. 스킬은 state.json을 직접 건드리지 않는다.
